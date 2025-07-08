@@ -1,0 +1,7 @@
+-Create a virtual environment and install the modules from the requirements.txt file.
+
+-In the command line type "pip install requirements.txt" for installing required versions needed to run the code.
+
+-Trained models are saved in the folder with name "Trained models". It contains the models saved after training 50 epochs. 
+
+-Log files with loss degradation are saved in the "logs" directory for each ticker respectively.

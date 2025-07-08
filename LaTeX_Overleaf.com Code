@@ -1,0 +1,225 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+% \usepackage[english]{babel}\addto\captionsenglish
+% {\renewcommand{\bibname}{References}}
+% \usepackage[backend=bibtex,style=numeric]{biblatex}  %backend=biber is 'better'
+% \usepackage{multirow}
+% \usepackage{textcomp}
+% \usepackage{csquotes} %Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+% \usepackage{listings}
+% \usepackage{babel,blindtext}
+% %\usepackage[T1]{fontenc}
+% % \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+% %     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% \usepackage{biblatex}
+%%\renewcommand*{\bibfont}{\fontsize{10}{12}\selectfont}
+% add your references to this file
+% \addbibresource{M335.bib}
+
+
+\begin{document}
+
+
+\title{Stock Data Forecasting Using Deep Learning with Backtesting Strategies}
+
+\author{
+\IEEEauthorblockN{\textsuperscript{} Vamshi Kumar Konduru, 11516045\\
+Mallikarjun Pandilla, 11519831 \\
+Harshitha Rangineni, 11504745\\
+Anusha Vanga, 11501693}
+}
+
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+The purpose of this study is to build a Deep Learning stock price forecasting model utilizing a Long Short-Term Memory Model (LSTM). This model uses the following information as inputs to forecast the close price of the stock for the following day: the open, high, low, adj close, and close prices.  A deep learning model called LSTM (Long short-term memory network) is used to discover future market trends by training the models with historical data. We have used 10 years of historical stock data of companies Apple, Google, Cisco & Domino’s which is extracted from yahoo finance API. Using five LSTM layers and the ADAM optimization tools, we created the architectural framework of the deep learning model. We tested the network using various iterations and epochs in order to get it to operate effectively in the forecasting model. Using the root mean square error, we have calculated the effectiveness of our proposed model (RMSE).
+This research includes data acquisition, exploratory data analysis, data visualization, model development, and training, interpreting prediction results which are essential phases in the data life cycle.
+\end{abstract}
+
+\section{Introduction and Statement of the Problem }
+
+Stock data is a time series-driven data widely used in financial market analysis to identify market trends for better investments. Accurate forecasting of market trends plays a prominent role in this field of study. To predict future market movements using models trained on historical data, we use the Long Short-Term Memory (LSTM) network from deep learning.
+Predicting stock prices is a well-known and significant problem. With an effective stock prediction method, we can learn regarding economic market behavior over the time and identify trends which otherwise could not have been seen. Machine learning will be a useful approach to solve this issue with the increased processing capacity of computers. Nonetheless, several machine learning algorithms can't make use of the public stock dataset because it is too small, and requesting more features could result in costing thousands of dollars per day.
+
+Fluctuations in stock prices affect investor perception and thus there is need for prediction of future prices. Market volatility depends on several factors that impact the price due to stocks relative stability and predictability. Macro factors, regional factors, company and market factors. This project includes data acquisition, exploratory data analysis, data visualization, model development, training, interpreting prediction results which are essential phases in the data life cycle. Because of the non-linearity of the data, it is a challenging task for accurate forecasting using traditional machine learning techniques. We propose a deep learning model LSTM (Long short-term memory network) to discover future market trends by training the models with historical data.
+
+
+\section{Review of Literature}
+
+In this research\cite{technical_indicators_forecasting}, we concentrated on historical stock prices and used technical indicators to increase forecasting accuracy. This study's objectives are to gauge forecast precision and assess outcomes. Technical indications were employed as features in the prediction model, which was built using historical data. The studies were carried out utilizing extended short-term memory networks. Backtesting was carried out to demonstrate the final model's applicability in practical settings and gauge the profitability of the outcomes.The final results show that although it is impossible to predict a stock's exact price in the future in order to provide profitable outcomes, the author of the research \cite{technical_indicators_forecasting} suggested that deep learning may be used to forecast stock market trends and produce buy and sell signals.
+
+According to the study presented in this paper\cite{forecasting_dl}, historical value affects all other market occurrences because it may be used to predict future movement. Finding paradigms and insights that can be used to produce surprisingly accurate predictions can be done using machine learning techniques. To look at a stock's potential future price projection, the Long Short Term Memory model is advised. This study will try to forecast stock market values to help investors make smarter, more informed choices.   Finally, the author of this study suggested that an LSTM model with more inputs might further enhance this by removing relevant data and employing additional input gates with low correlated variables to remove their noise caused by popular factors. Additional research may be conducted\cite{forecast_ML} on LSTM models suited for forecasting stock prices, according to tests of several additional methods employing a combination of deep learning and machine learning techniques \cite{forecast_DL_ML}.
+
+
+\section{Objective of the study}
+
+The objective of this study is to forecast the future stock prices of companies listed in the S&P500 by identifying the trends in the historical data. The chosen companies list is Google, Apple, Cisco, Dominos.
+
+\section{Data Collection}
+
+The dataset is extracted from yahoo finance API. Dataset consists of Date, Open price, High price, low price, closing price, and volume information for companies Apple(AAPL), Google(GOOG), Cisco(CSCO), and Domino's(DPZ). Data is extracted between 2011-01-01 and 2021-12-30 a total of 11 years. Each stock's price information contains data from 2011 to 2021 on a daily interval, which makes more than 2768 records for each company. The code extracts the dataset through this API during run time to evaluate and execute the results. A sample snippet of data extracted is shown in the below figure.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=9cm,height=8cm\textwidth]{data_extraction.png}
+\caption{Figure representing sample data extracted}
+\label{fig:my_label}
+\end{figure}
+
+\section{Exploratory Data Analysis and Hypothesis of the Study}
+
+A suitable method for comprehending and evaluating the data sets is exploratory data analysis(EDA). Data scientists and analysts frequently utilize this technique to highlight key aspects of data sets and visualize them using various graphs and charts. It aids data scientists in their efforts to find patterns, identify anomalies or validate presumptions. Here we have generated graphs related to closing prices, the volume of the stocks sold, daily returns between the data points.
+
+According to the "Efficient Market Hypothesis"(EMH), since the present stock price takes into account all of the information that is currently available about a company, it is impossible to make the market low using the same information. However, the backtesting LSTM approach uses previous data to forecast future stock prices. Machine learning has gained popularity in recent years thanks to some rather encouraging outcomes in a variety of sectors and industries, which have inspired many analysts, academics, and traders to employ machine learning techniques.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{close_prices.png}
+\caption{The closing prices of individual stocks.}
+\label{fig:my_label}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{volume_info.png}
+\caption{The volume of individual stocks}
+\label{fig:my_label}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.22]{daily_returns.png}
+\caption{The daily returns calculated based on the present and previous day}
+\label{fig:my_label}
+\end{figure}
+
+\newpage
+It is clear from the graph of closing prices above that the company's specific closing price is associated with other closing prices. Therefore, one model can effectively predict all of the firm closing prices from the selected list.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{risk_plot.png}
+\caption{Risk information based on the expected returns}
+\label{fig:my_label}
+\end{figure}
+
+\section{Data Analytics}
+
+Data extraction through the yahoo API endpoint is the first stage of this project, followed by data collection. Open, high, low, close, and volume information of the selected list of companies are included. The future close price is predicted by this approach using a previous close price. EDA tasks like identifying and imputing missing data points are carried out using the extracted data. Further, LSTM model is used to estimate future prices by training it by using historical data. Developed model is trained on a batch size of 30 for 50 epochs in total to reduce the loss. By including one more layer and altering the activation, hyperparameter tuning is carried out at this step. To improve forecasting results, this hyperparameter needs to be modified during model training. The moving average back testing technique will then be applied to the anticipated results.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{methodology.JPG}
+\caption{Blueprint representing the research design}
+\label{fig:my_label}
+\end{figure}
+
+
+\section{Model Architecture}
+Different data processing and data transformation techniques have been employed in developing this project. After the data extraction is done, we filter the data for the closing price as it is the variable that is been focusing on forecasting. As our data points differ greatly between the range, an initially standard scalar is applied to the data to perform the transformation to a range between 0 to 1. In this process, MinMaxScaler function is used from scikit-learn for transformation. Further the data is split between 70 and 30 percent for training and testing using train test split function from the scikit-learn module.
+
+Our model makes predictions as well as random biases and weights by feeding data to the present neural network, which is a component of model training. The LSTM model developed contains nine levels, including the input layer, four LSTM layers (hidden layers), four dropout layers, and an output layer with the activation function tanh. Each unit in a layer connects to all units in neighboring layers. The output layer, which has one thick layer unit, creates the fully connected layer. As a part of hyperparameter tuning activation function of the layers is changed to 'relu' based on the information provided by author in \cite{forecasting_dl}. Several other parameter tuning is performed by adding one extra LSTM layer to the network, but the network lags far behind in this case.
+Architecture of the LSTM model developed is shown below image.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.40]{model_summary_01.png}
+\caption{LSTM model summary representing layers}
+\label{fig:my_label}
+\end{figure}
+
+\section{Data Visualization and Results}
+During the model training, the losses of the model were captured and plotted respectively. During the model training, a validation set is not provided to the data. 30 percent of the data is used for testing the model performance. In this section, the losses and the prediction results are visualized and discussed.
+
+\begin{center}
+\includegraphics[scale=0.40]{loss_AAPL.png}
+\newline
+\caption{Training loss for Apple}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.40]{loss_GOOG.png}
+\newline
+\caption{Training loss for Google}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.40]{loss_CSCO.png}
+\newline
+\caption{Training loss for Cisco}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.40]{loss_DPZ.png}
+\newline
+\caption{Training loss for Domino's}
+\end{center}
+
+Below figures representing the test data and prediction data from our trained models comparatively. We can observe the results from the model containing 5 LSTM layers and relu activation function are more diverged and resulted in greater root mean square error values.
+
+\begin{center}
+\includegraphics[scale=0.22]{AAPL_results_01.png}
+\caption{Model with tanh as activation function and 4 LSTM layers(RMSE = 5.037)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{google_results_01.png}
+\caption{Model with tanh as activation function and 4 LSTM layers(RMSE = 5.269)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{csco_results_01.png}
+\caption{Model with tanh as activation function and 4 LSTM layers(RMSE = 1.299)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{DPZ_results_01.png}
+\caption{Model with tanh as activation function and 4 LSTM layers(RMSE = 18.291)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{AAPL_results_02.png}
+\caption{Model with relu as activation function and 5 LSTM layers(RMSE=36.689)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{google_results_02.png}
+\caption{Model with relu as activation function and 5 LSTM layers(RMSE=29.439)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{csco_results_02.png}
+\caption{Model with relu as activation function and 5 LSTM layers(RMSE=1.950)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{DPZ_results_02.png}
+\caption{Model with relu as activation function and 5 LSTM layers(RMSE=77.074)}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.22]{backtest_plot.png}
+\caption{Moving average calculated for duration of 10, 20, 50 days respectively}
+\end{center}
+
+We can see from the aforementioned graphs that our model, which is made up of 4 layers and uses tanh as the activation function, is superior to the model with 5 layers and activation function. The RMSE values represented in the above figures show the predictions have more diverged from the actual. As a part of the qualitative analysis, the graphs in the moving average are less diverged and gives accurate predictions when compared to our forecasting results. Where as the model with 5 LSTM layers and relu activation is more diverged from the actual test data. So the model with four LSTM layers with tanh activation function is finally chosen.
+
+\section{Conclusion}
+
+In this project, a Long Short-term memory network(LSTM) to predict the closing prices of the stocks is developed by hyperparameter tuning on the activation function and changing the number of layers in the model. From the above results based on the root mean squared values and qualitative analysis from the graphs, model performance is better for AAPL, GOOG, CSCO. Increasing the number of layers increased the forecasting error rate. Further research can be done on investigating on LSTM model with a combination of machine learning models as a part of feature extraction process.
+
+\bibliographystyle{plain}
+\bibliography{sample}
+
+\end{document}
