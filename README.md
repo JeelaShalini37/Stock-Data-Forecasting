@@ -111,29 +111,10 @@ Predictions followed market trends closely, even in periods of high volatility.
 
 Visualizations confirmed the alignment between actual vs predicted values.
 
-### 📂 Project Structure
-Stock-Data-Forecasting/
-├── Data/
-│   └── stock_data.csv              # Historical stock price data
-│
-├── Models/
-│   ├── cnn_model.py                # CNN model definition
-│   ├── lstm_model.py               # LSTM model definition
-│   └── rnn_model.py                # RNN model definition
-│
-├── utils/
-│   └── preprocessing.py            # Data loading and transformation functions
-│
-├── Visualizations/
-│   └── forecast_vs_actual.png      # Graphs comparing predictions with actual
-│
-├── main_forecasting.py            # Master script to run training, prediction, selection
-├── requirements.txt               # All Python dependencies
-└── README.md                      # Project documentation
 
 
 
-###📌 Key Highlights
+## 📌 Key Highlights
 ✅ Combines three powerful deep learning models for robust forecasting.
 
 ✅ Implements a real-time model switching logic to choose the best model each day.
@@ -142,7 +123,7 @@ Stock-Data-Forecasting/
 
 ✅ Ideal for quantitative finance, algo trading, and time-series prediction projects.
 
-###🚀 Future Enhancements
+## 🚀 Future Enhancements
 Add support for attention mechanisms or Transformer-based models.
 
 Include macroeconomic indicators as additional input features.
