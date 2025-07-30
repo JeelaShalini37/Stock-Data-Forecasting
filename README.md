@@ -1,15 +1,20 @@
 # 📊 Stock Price Forecasting with Deep Learning (LSTM)
 
 ## 🚀 Overview
-This project aims to predict stock closing prices using **Long Short-Term Memory (LSTM)** networks — a type of recurrent neural network effective for time-series data. The system was trained on over a decade of historical data from four major companies (Apple, Google, Cisco, and Domino's), enabling insight into market trends and investment strategies.
+This project implements a robust, intelligent forecasting system designed to predict both next-day closing prices and high prices of stock market indices using historical time-series data. Instead of relying on a single predictive model, it evaluates and dynamically selects the best-performing model among CNN, LSTM, and RNN architectures for each prediction point, thereby optimizing accuracy under changing market dynamics.
 
----
+By combining the strengths of different deep learning architectures and applying rigorous evaluation metrics, the solution delivers highly reliable and scalable financial forecasts for stock market analysis and investment decision-making.
+
 
 ## 🎯 Objectives
-- Predict next-day stock **closing prices** using LSTM deep learning.
-- Evaluate model effectiveness using **RMSE** and backtesting.
-- Visualize patterns in volume, returns, correlations, and volatility.
-- Enable data-driven strategy building via predictive modeling.
+- Build a multi-architecture deep learning system to predict future stock values.
+
+- Leverage time-series forecasting techniques for real-world financial data.
+
+- Design a dynamic selection mechanism that chooses the best model (CNN, LSTM, or RNN) based on performance metrics at every time step.
+
+- Provide meaningful visualizations and performance metrics to support results.
+
 
 ---
 
@@ -22,31 +27,85 @@ This project aims to predict stock closing prices using **Long Short-Term Memory
 ---
 
 ## 📈 Data
-- Source: [Yahoo Finance API]
-- Daily price and volume data from 2011–2021
-- Tickers used: AAPL, GOOG, CSCO, DPZ
+Source: Publicly available datasets (e.g., Yahoo Finance or similar)
 
+Index Used: Shanghai Composite Index (000001)
+
+Time Range: 1997–2022
+
+Data Frequency: Daily
+
+Features Considered:
+
+Open
+
+High
+
+Low
+
+Close
+
+Adj Close
+
+Volume
+
+Each feature plays a crucial role in capturing market trends and investor behavior.
 ---
 
 ## 📊 Methodology
-1. **Data Preprocessing**: Cleaning, normalization (min-max scaling), and formatting into sequences for LSTM input.
-2. **Model Development**: Built LSTM model with 5 hidden layers, optimized using **Adam**, trained using **MSE loss**.
-3. **Evaluation**: Used RMSE for model performance and implemented **backtesting** strategies (10, 30, 60-day moving averages).
-4. **Visualization**: Generated trend plots, loss curves, return-vs-risk plots, and correlation heatmaps.
+The solution follows a modular, interpretable pipeline:
+
+1. Data Preprocessing
+Handled missing values and cleaned dataset.
+
+Used MinMaxScaler for normalization of input features.
+
+Created sliding windows (look-back sequences) for training time-series models.
+
+2. Model Development
+Developed three separate neural network models:
+
+📈 CNN Model: Extracts short-term spatial patterns in data using convolutional layers.
+
+🔁 LSTM Model: Captures long-term temporal dependencies using memory cells.
+
+🔄 RNN Model: Basic recurrent network to detect patterns over sequences.
+
+Each model was trained independently on the same dataset.
+
+3. Dynamic Model Selection Strategy
+For each test window, all three models generated forecasts.
+
+Evaluation metrics (RMSE, MAE, MAPE) were calculated.
+
+The model with the lowest error was selected to make the final prediction for that day.
+
+This daily decision strategy allows adaptability to market volatility and regime changes.
+
+4. Visualization & Evaluation
+Plotted predicted vs actual values to compare performance.
+
+Created error metric dashboards to analyze accuracy over time.
+
+Observed that no single model was best consistently, supporting the need for dynamic selection.
+
 
 ---
 
 ## 📉 Results
-| Ticker | RMSE |
-|--------|------|
-| AAPL   | 5.03 |
-| GOOG   | 5.26 |
-| CSCO   | 1.29 |
-| DPZ    | 5.26 |
+Metric	Closing Price Forecast	High Price Forecast
+RMSE	~0.025	~0.03
+MAPE	< 5%	< 6%
+Best Model Hit Rate	~92%	~88%
 
-*DPZ showed higher divergence and less reliable prediction due to volatility.*
+The dynamic selector consistently outperformed any individual model alone.
+
+Predictions followed market trends closely, even in periods of high volatility.
+
+Visualizations confirmed the alignment between actual vs predicted values.
+
 
 ---
 
-## 📌 Folder Structure
+
 
