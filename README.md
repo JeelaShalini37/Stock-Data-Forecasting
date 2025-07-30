@@ -1,4 +1,4 @@
-# 📊 Stock Price Forecasting with Deep Learning (LSTM)
+# 📊 Stock Data Forecasting with Machine Learning (LSTM)
 
 ## 🚀 Overview
 This project implements a robust, intelligent forecasting system designed to predict both next-day closing prices and high prices of stock market indices using historical time-series data. Instead of relying on a single predictive model, it evaluates and dynamically selects the best-performing model among CNN, LSTM, and RNN architectures for each prediction point, thereby optimizing accuracy under changing market dynamics.
@@ -27,29 +27,29 @@ By combining the strengths of different deep learning architectures and applying
 ---
 
 ## 📈 Data
-Source: Publicly available datasets (e.g., Yahoo Finance or similar)
+- Source: Publicly available datasets (e.g., Yahoo Finance or similar)
 
-Index Used: Shanghai Composite Index (000001)
+- Index Used: Shanghai Composite Index (000001)
 
-Time Range: 1997–2022
+- Time Range: 1997–2022
 
-Data Frequency: Daily
+- Data Frequency: Daily
 
 Features Considered:
 
-Open
+. Open
 
-High
+. High
 
-Low
+. Low
 
-Close
+. Close
 
-Adj Close
+. Adj Close
 
-Volume
+. Volume
 
-Each feature plays a crucial role in capturing market trends and investor behavior.
+
 ---
 
 ## 📊 Methodology
@@ -92,7 +92,6 @@ Observed that no single model was best consistently, supporting the need for dyn
 
 ---
 
-## 📉 Results
 ## 📈 Results & Performance
 
 This forecasting system was tested on historical stock data (1997–2022) and demonstrated **strong performance** using a dynamic model selection strategy.
